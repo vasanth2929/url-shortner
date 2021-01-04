@@ -6,8 +6,10 @@
     <title>Url Shortner</title>
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/index.css" />
@@ -16,12 +18,26 @@
     <div class="container">
       <!-- <p>Url Shortner</p> -->
       <form action="/" method="POST">
-        <input type="url" name="url" placeholder="Enter Url" />
+        <div class="form-group">
+          <label for="url">Long Url</label>
+          <input id="url" type="url" name="url" placeholder="Enter Long Url" />
+        </div>
+        <div class="form-group">
+          <label for="short_name">Custom Short Name</label>
+          <input
+            id="custom_short_url"
+            name="custom_short_url"
+            placeholder="Enter Short Name (Optional)"
+          />
+        </div>
         <button>Generate</button>
       </form>
       <div class="message">
         <% if(locals.shortUrl){ %>
-        <a href="<%= shortUrl %>" target="_blank"><%= shortUrl %></a> <% } %>
+        <a href="<%= shortUrl %>" target="_blank"><%= shortUrl %></a> <% } %> <%
+        if(locals.error){ %>
+        <p class="error"><%= error %></p>
+        <% } %>
       </div>
     </div>
   </body>

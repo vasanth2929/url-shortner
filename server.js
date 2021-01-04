@@ -18,7 +18,7 @@ app.get("/", (_, res) => {
 
 app.post("/", async (req, res) => {
   try {
-    let { url } = req.body;
+    let { url, custom_short_url } = req.body;
     if (url) {
       let oldUrl = await Url.findOne({ originalUrl: url });
       if (oldUrl) {
@@ -26,15 +26,20 @@ app.post("/", async (req, res) => {
           shortUrl: req.headers.host + "/" + oldUrl.shortUrl,
         });
       } else {
-        let short = nanoid(5);
-        let savedUrl = new Url({
-          originalUrl: url,
-          shortUrl: short,
-        });
-        await savedUrl.save();
-        res.render("index", {
-          shortUrl: req.headers.host + "/" + savedUrl.shortUrl,
-        });
+        let short = custom_short_url ? custom_short_url : nanoid(5);
+        let shortUrlExist = await Url.findOne({ shortUrl: short });
+        if (shortUrlExist) {
+          res.render("index", { error: "Short Name Already Exists." });
+        } else {
+          let savedUrl = new Url({
+            originalUrl: url,
+            shortUrl: short,
+          });
+          await savedUrl.save();
+          res.render("index", {
+            shortUrl: req.headers.host + "/" + savedUrl.shortUrl,
+          });
+        }
       }
     } else {
       res.render("index", { error: "" });
