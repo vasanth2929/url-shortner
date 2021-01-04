@@ -11,4 +11,4 @@ const UrlSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("shorturl", UrlSchema);
+module.exports = mongoose.model("urlshortner", UrlSchema);

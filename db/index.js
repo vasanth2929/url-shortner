@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 async function connectDatabase() {
   try {
-    await mongoose.connect("mongodb://localhost:27017/urlshortner", {
+    await mongoose.connect("mongodb://localhost:27017/ta_shop", {
       useCreateIndex: true,
       useNewUrlParser: true,
       useUnifiedTopology: true,
