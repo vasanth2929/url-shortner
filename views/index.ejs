@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Url Shortner</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/index.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- <p>Url Shortner</p> -->
+      <form action="/" method="POST">
+        <input type="url" name="url" placeholder="Enter Url" />
+        <button>Generate</button>
+      </form>
+      <div class="message">
+        <% if(locals.shortUrl){ %>
+        <a href="<%= shortUrl %>" target="_blank"><%= shortUrl %></a> <% } %>
+      </div>
+    </div>
+  </body>
+</html>
