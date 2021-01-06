@@ -3,6 +3,7 @@ const express = require("express");
 const Url = require("./models/url");
 const { nanoid } = require("nanoid");
 const { connectDatabase } = require("./db");
+require('dotenv').config()
 let PORT = 9000;
 // Initialize App
 const app = express();
@@ -26,7 +27,7 @@ app.post("/", async (req, res) => {
           shortUrl: req.headers.host + "/" + oldUrl.shortUrl,
         });
       } else {
-        let short = custom_short_url ? custom_short_url : nanoid(5);
+        let short = custom_short_url ? custom_short_url.toLowerCase() : nanoid(5);
         let shortUrlExist = await Url.findOne({ shortUrl: short });
         if (shortUrlExist) {
           res.render("index", { error: "Short Name Already Exists." });
